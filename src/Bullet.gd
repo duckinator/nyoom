@@ -2,6 +2,8 @@ extends RigidBody
 
 var cleaning = false
 
+var next_impulse = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var timer = Timer.new()
@@ -22,3 +24,12 @@ func _process(delta):
 	scale -= Vector3(0.1, 0.1, 0.1)
 	if scale <= Vector3(0.0, 0.0, 0.0):
 		queue_free()
+
+func _integrate_forces(state):
+	if next_impulse:
+		var impulse = next_impulse
+		next_impulse = null
+		apply_impulse(Vector3(0, 0, 0), impulse)
+
+func fire(impulse):
+	next_impulse = impulse

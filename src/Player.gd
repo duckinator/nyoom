@@ -35,13 +35,12 @@ func _ready():
 	#camera.fov = Game.get_field_of_view()
 
 func action_primary(_delta):
-	# WJHLKJSHDFLKJSDHFLKJSDHFLKSJDF
+	var impulse = Vector3(0, 0, -50)
 	var bullet = BULLET.instance()
-	print(get_parent().name)
-	get_parent().add_child(bullet)
+	bullet.rotation = Vector3(rotation.x, rotation_helper.rotation.y, 0)
 	bullet.translation = translation + Vector3(0, -0.5, 0)
-	print(bullet.name)
-	bullet.apply_impulse(Vector3(0, 0, 0), Vector3(0, 20, -50))
+	get_parent().add_child(bullet)
+	bullet.fire(impulse)
 	last_bullet = bullet
 
 func action_secondary(_delta):
@@ -54,8 +53,8 @@ func action_secondary(_delta):
 	translation = bullet.translation
 	# TODO: Properly figure out rotation bullshit. This will be tricky.
 	#rotation = bullet.rotation
-	move_and_slide(bullet.angular_velocity)
-	remove_child(bullet)
+	#move_and_slide(bullet.angular_velocity)
+	bullet.queue_free()
 
 func get_mouse_sensitivity():
 	return 45
