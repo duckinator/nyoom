@@ -37,8 +37,9 @@ func _ready():
 func action_primary(_delta):
 	var impulse = get_global_transform().basis * Vector3(0, 0, -50)
 	var bullet = BULLET.instance()
-	bullet.rotation = Vector3(rotation.x, rotation_helper.rotation.y, 0)
-	bullet.translation = translation + Vector3(0, -0.5, 0)
+	bullet.global_transform = $RotationHelper/Camera/BulletSpawn.global_transform
+	#bullet.rotation = Vector3(rotation.x, rotation_helper.rotation.y, 0)
+	#bullet.translation = translation + Vector3(0, -0.5, 0)
 	get_parent().add_child(bullet)
 	bullet.fire(impulse)
 	last_bullet = bullet
