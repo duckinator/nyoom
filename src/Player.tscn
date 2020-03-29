@@ -23,4 +23,4 @@ shape = SubResource( 2 )
 current = true
 
 [node name="BulletSpawn" type="Spatial" parent="RotationHelper/Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5 )

@@ -11,6 +11,8 @@ radial_segments = 32
 radius = 0.25
 
 [node name="Bullet" type="RigidBody"]
+contacts_reported = 4
+contact_monitor = true
 script = ExtResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
