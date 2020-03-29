@@ -6,8 +6,6 @@ var next_impulse = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	add_collision_exception_with(get_parent().get_node('Player'))
-	connect("body_entered", self, "on_body_entered")
 	var timer = Timer.new()
 	timer.set_one_shot(true)
 	timer.set_wait_time(5)
@@ -35,8 +33,3 @@ func _integrate_forces(state):
 
 func fire(impulse):
 	next_impulse = impulse
-
-func on_body_entered(body):
-	if body is KinematicBody:
-		add_collision_exception_with(body)
-	print("BODY ENTERED", body, body.name)
