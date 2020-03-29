@@ -7,9 +7,7 @@ const BULLET = preload("res://Bullet.tscn")
 const FALL_MULTIPLIER = 1.0
 const LOW_JUMP_MULTIPLIER = 1.5
 
-const MASS = 10
-
-var gravity
+const gravity = Vector3(0, -10, 0)
 const MAX_SPEED = 20
 const JUMP_SPEED = 10
 const ACCEL = 3
@@ -55,7 +53,7 @@ func action_secondary(_delta):
 	pass
 
 func get_mouse_sensitivity():
-	return 50
+	return 45
 
 func get_joypad_sensitivity():
 	return 50
@@ -71,10 +69,6 @@ func _process(_delta):
 	safe_rotate(Vector2(horiz, vert))
 
 func _physics_process(delta):
-	if not gravity:
-		gravity = Vector3(0, -9, 0) #Game.get_total_gravity_for($DummyRigidBody)
-		#$DummyRigidBody.visible = false
-	
 	if not is_dead:
 		process_input(delta)
 		process_movement(delta)
