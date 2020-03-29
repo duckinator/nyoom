@@ -20,9 +20,6 @@ var JOYPAD_SENSITIVITY = 0
 var vel = Vector3(0, 0, 0)
 var dir = Vector3(0, 0, 0)
 
-const MAX_HEALTH = 100
-var health = 0
-
 var is_dead = false
 var waiting_for_respawn = false
 
@@ -37,16 +34,14 @@ func _ready():
 
 	#camera.fov = Game.get_field_of_view()
 
-	adjust_health(MAX_HEALTH)
-
 func action_primary(_delta):
 	# WJHLKJSHDFLKJSDHFLKJSDHFLKSJDF
 	var bullet = BULLET.instance()
 	print(get_parent().name)
 	get_parent().add_child(bullet)
-	bullet.translation = translation + Vector3(0, -0.5, 1)
+	bullet.translation = translation + Vector3(0, -0.5, 0)
 	print(bullet.name)
-	bullet.apply_impulse(Vector3(0, 0, 0), Vector3(0, 10, 0))
+	bullet.apply_impulse(Vector3(0, 0, 0), Vector3(0, 20, -50))
 	last_bullet = bullet
 
 func action_secondary(_delta):
@@ -82,32 +77,10 @@ func _physics_process(delta):
 	if not is_dead:
 		process_input(delta)
 		process_movement(delta)
-	process_ui(delta)
 	process_respawn(delta)
 
 func get_last_velocity():
 	return vel
-
-func adjust_health(diff):
-	health = clamp(health + diff, 0, MAX_HEALTH)
-	return health
-
-func update_hud():
-	pass
-#	$HUD/Panel_Left/Label_Health.text = str(health)
-#	$HUD/Panel_Left/Health_Bar.value = health
-#	
-#	var in_weapon = "?"
-#	var total_ammo = 0
-#	if len(inventory) > 0 and inventory[current_item] != null:
-#		var item = inventory[current_item]
-#		in_weapon = str(item.in_weapon) + " +" + str((item.ammo - item.in_weapon) / item.MAX_IN_WEAPON)
-#		total_ammo = item.ammo
-#	$HUD/Panel_Left/Label_Ammo.text = in_weapon
-#	$HUD/Panel_Left/Ammo_Bar.value = total_ammo
-
-func emit_sound(trans, sound, loudness):
-	get_tree().current_scene.player_noise(trans, sound, loudness)
 
 func safe_rotate(vec):
 	rotation_helper.rotate_x(deg2rad(vec.y * MOUSE_SENSITIVITY * -1))
@@ -189,12 +162,6 @@ func process_movement(delta):
 	vel.x = hvel.x
 	vel.z = hvel.z
 	vel = move_and_slide(vel, Vector3(0, 1, 0), false, 4, deg2rad(MAX_SLOPE_ANGLE))
-
-func process_changing_item(_delta):
-	pass
-
-func process_ui(_delta):
-	update_hud()
 
 func process_respawn(_delta):
 	pass
