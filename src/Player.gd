@@ -44,13 +44,23 @@ func action_primary(_delta):
 	var bullet = BULLET.instance()
 	print(get_parent().name)
 	get_parent().add_child(bullet)
-	bullet.translation = translation
+	bullet.translation = translation + Vector3(0, -0.5, 1)
 	print(bullet.name)
-	#bullet.apply_impulse(Vector3(0, 0, 0), Vector3(0, 100, 0))
+	bullet.apply_impulse(Vector3(0, 0, 0), Vector3(0, 10, 0))
 	last_bullet = bullet
 
 func action_secondary(_delta):
-	pass
+	if last_bullet == null:
+		return
+	
+	var bullet = last_bullet
+	last_bullet = null
+	
+	translation = bullet.translation
+	# TODO: Properly figure out rotation bullshit. This will be tricky.
+	#rotation = bullet.rotation
+	move_and_slide(bullet.angular_velocity)
+	remove_child(bullet)
 
 func get_mouse_sensitivity():
 	return 45
