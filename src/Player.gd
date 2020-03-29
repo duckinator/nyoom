@@ -1,5 +1,9 @@
 extends KinematicBody
 
+var last_bullet = null
+
+const BULLET = preload("res://Bullet.tscn")
+
 const FALL_MULTIPLIER = 1.0
 const LOW_JUMP_MULTIPLIER = 1.5
 
@@ -36,6 +40,19 @@ func _ready():
 	#camera.fov = Game.get_field_of_view()
 
 	adjust_health(MAX_HEALTH)
+
+func action_primary(_delta):
+	# WJHLKJSHDFLKJSDHFLKJSDHFLKSJDF
+	var bullet = BULLET.instance()
+	print(get_parent().name)
+	get_parent().add_child(bullet)
+	bullet.translation = translation
+	print(bullet.name)
+	#bullet.apply_impulse(Vector3(0, 0, 0), Vector3(0, 100, 0))
+	last_bullet = bullet
+
+func action_secondary(_delta):
+	pass
 
 func get_mouse_sensitivity():
 	return 50
@@ -114,11 +131,17 @@ func jump(assist=1):
 
 # Various _process_* functions:
 
-func process_input(_delta):
+func process_input(delta):
 	# Walking
 	dir = Vector3()
 	var cam_xform = camera.get_global_transform()
 	var input_movement_vector = Vector2()
+	
+	if Input.is_action_just_pressed("action_primary"):
+		action_primary(delta)
+	
+	if Input.is_action_just_pressed("action_secondary"):
+		action_secondary(delta)
 	
 	if Input.is_action_pressed("movement_forward"):
 		input_movement_vector.y += Input.get_action_strength("movement_forward")
@@ -166,9 +189,6 @@ func process_movement(delta):
 func process_changing_item(_delta):
 	pass
 
-func process_reloading(_delta):
-	pass
-
 func process_ui(_delta):
 	update_hud()
 
@@ -176,10 +196,6 @@ func process_respawn(_delta):
 	pass
 
 func _input(event):
-	# TODO: Determine why there's no KEY_BACKTICK or similar?
-	#if Input.is_key_pressed(96):
-	#	Console.toggle()
-	
 	if is_dead:
 		if Input.is_key_pressed(KEY_SPACE):
 			waiting_for_respawn = true
