@@ -35,7 +35,7 @@ func _ready():
 	#camera.fov = Game.get_field_of_view()
 
 func action_primary(_delta):
-	var impulse = Vector3(0, 0, -50)
+	var impulse = get_global_transform().basis * Vector3(0, 0, -50)
 	var bullet = BULLET.instance()
 	bullet.rotation = Vector3(rotation.x, rotation_helper.rotation.y, 0)
 	bullet.translation = translation + Vector3(0, -0.5, 0)
