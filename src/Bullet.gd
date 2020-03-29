@@ -1,11 +1,12 @@
 extends RigidBody
 
+var player
 var cleaning = false
-
 var next_impulse = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	player = get_parent().get_node('Player')
 	var timer = Timer.new()
 	timer.set_one_shot(true)
 	timer.set_wait_time(5)
@@ -18,6 +19,9 @@ func cleanup():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if player.last_bullet != self:
+		cleaning = true
+	
 	if not cleaning:
 		return
 	
