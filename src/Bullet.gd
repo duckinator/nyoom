@@ -27,6 +27,9 @@ func _process(delta):
 	
 	scale -= Vector3(0.1, 0.1, 0.1)
 	if scale <= Vector3(0.0, 0.0, 0.0):
+		# Make sure to unset player.last_bullet if the bullet disappears.
+		if self == player.last_bullet:
+			player.last_bullet = null
 		queue_free()
 
 func _integrate_forces(state):
