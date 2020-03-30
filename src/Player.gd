@@ -51,7 +51,9 @@ func action_secondary(_delta):
 	
 	translation = bullet.translation
 	# TODO: Properly figure out rotation bullshit. This will be tricky.
-	#rotation = bullet.rotation
+	rotation = bullet.rotation
+	#vel = bullet.angular_velocity * 5
+	#vel = bullet.global_transform * bullet.angular_velocity
 	#move_and_slide(bullet.angular_velocity)
 	bullet.queue_free()
 
