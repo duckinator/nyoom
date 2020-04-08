@@ -26,7 +26,7 @@ func _process(delta):
 		return
 	
 	scale -= Vector3(0.1, 0.1, 0.1)
-	if scale <= Vector3(0.0, 0.0, 0.0):
+	if scale <= Vector3(0.1, 0.1, 0.1):
 		# Make sure to unset player.last_bullet if the bullet disappears.
 		if self == player.last_bullet:
 			player.last_bullet = null
