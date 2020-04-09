@@ -18,7 +18,7 @@ func cleanup():
 	cleaning = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if player.last_bullet != self:
 		cleaning = true
 	
@@ -32,7 +32,7 @@ func _process(delta):
 			player.last_bullet = null
 		queue_free()
 
-func _integrate_forces(state):
+func _integrate_forces(_state):
 	if next_impulse:
 		var impulse = next_impulse
 		next_impulse = null
