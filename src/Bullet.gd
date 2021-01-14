@@ -10,7 +10,10 @@ func _ready():
 	var timer = Timer.new()
 	timer.set_one_shot(true)
 	timer.set_wait_time(5)
-	timer.connect("timeout", self, "cleanup")
+	var err = timer.connect("timexout", self, "cleanup")
+	if err != OK:
+		Error.print_info(err)
+		#push_error("Bullet.gd:15: Error " + str(err) + " in _ready(). See https://da.gd/godot-errs")
 	add_child(timer)
 	timer.start()
 
