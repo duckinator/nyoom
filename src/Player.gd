@@ -32,8 +32,6 @@ func _ready():
 	camera = $RotationHelper/Camera
 	rotation_helper = $RotationHelper
 
-	#camera.fov = Game.get_field_of_view()
-
 func action_primary(_delta):
 	var bullet = BULLET.instance()
 	bullet.global_transform = $RotationHelper/Camera/BulletSpawn.global_transform
