@@ -57,7 +57,12 @@ func get_mouse_sensitivity():
 func get_joypad_sensitivity():
 	return 50
 
+var playing = false
 func _process(_delta):
+	if not playing:
+		playing = true
+		return
+	
 	MOUSE_SENSITIVITY = float(get_mouse_sensitivity()) / 100
 	JOYPAD_SENSITIVITY = get_joypad_sensitivity()
 	
