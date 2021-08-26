@@ -1,11 +1,13 @@
-# @duckinator's Godot Game Template [![Built using Godot Engine 3.1][godot-shield]][godot-ws] [![Build Status][cirrus-shield]][cirrus-ws]
+# nyoom / godot demo [![Built using Godot Engine 3.1][godot-shield]][godot-ws] [![Build Status][cirrus-shield]][cirrus-ws]
 
+<!--
 [godot-shield]: https://img.shields.io/badge/Godot_Engine-3.1-blue.svg
 [godot-ws]: https://godotengine.org/
 [cirrus-shield]: https://api.cirrus-ci.com/github/duckinator/godot-template.svg
 [cirrus-ws]: https://cirrus-ci.com/github/duckinator/godot-template
+-->
 
-Template repo I (@duckinator) use for Godot games/experiments.
+demo of an idea i had
 
 <!-- Builds from the master branch are available at <https://duckinator.itch.io/???>. -->
 
